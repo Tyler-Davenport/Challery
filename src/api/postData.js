@@ -3,9 +3,24 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getBooks = (uid) =>
+// get all posts
+const getPosts = () =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
+    fetch(`${endpoint}/post.json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(Object.values(data)))
+      .catch(reject);
+  });
+
+// get posts by user
+const getPostsByUid = (uid) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/post.json?orderBy="uid"&equalTo="${uid}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -74,9 +89,10 @@ const updateBook = (payload) =>
       .catch(reject);
   });
 
-const getBooksByAuthor = (firebaseKey) =>
+// get posts by artistId
+const getPostsByArtistId = (artistId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/books.json?orderBy="author_id"&equalTo="${firebaseKey}"`, {
+    fetch(`${endpoint}/post.json?orderBy="artistId"&equalTo="${artistId}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -103,4 +119,4 @@ const booksOnSale = (uid) =>
       .catch(reject);
   });
 
-export { getBooks, createBook, booksOnSale, deleteBook, getSingleBook, updateBook, getBooksByAuthor };
+export { getPosts, getPostsByUid, createBook, booksOnSale, deleteBook, getSingleBook, updateBook, getPostsByArtistId };

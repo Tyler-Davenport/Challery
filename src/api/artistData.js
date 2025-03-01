@@ -24,10 +24,26 @@ const getAuthors = (uid) =>
 // FIXME: CREATE AUTHOR
 const createAuthor = () => {};
 
-// FIXME: GET SINGLE AUTHOR
-const getSingleAuthor = (firebaseKey) =>
+// get artist by id
+export const getArtistById = (artistId) =>
+  fetch(`${endpoint}/artist.json?orderBy="firebaseKey"&equalTo="${artistId}"`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const artist = data ? Object.values(data)[0] : null;
+      return artist;
+    })
+    .catch((error) => {
+      console.error('Error fetching artist:', error);
+      return null;
+    });
+
+// FIXME: GET SINGLE ARTIST
+const getSingleArtist = (firebaseKey) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/authors/${firebaseKey}.json`, {
+    fetch(`${endpoint}/artist/${firebaseKey}.json`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -74,4 +90,4 @@ const favoriteAuthors = (uid) =>
       .catch(reject);
   });
 
-export { getAuthors, createAuthor, getSingleAuthor, deleteSingleAuthor, updateAuthor, favoriteAuthors, getAuthorBooks };
+export { getAuthors, createAuthor, getSingleArtist, deleteSingleAuthor, updateAuthor, favoriteAuthors, getAuthorBooks };
