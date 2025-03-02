@@ -2,9 +2,9 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getAuthors = (uid) =>
+const getArtists = (firebaseKey) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
+    fetch(`${endpoint}/artist.json?orderBy="firebaseKey"&equalTo="${firebaseKey}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -90,4 +90,4 @@ const favoriteAuthors = (uid) =>
       .catch(reject);
   });
 
-export { getAuthors, createAuthor, getSingleArtist, deleteSingleAuthor, updateAuthor, favoriteAuthors, getAuthorBooks };
+export { getArtists, createAuthor, getSingleArtist, deleteSingleAuthor, updateAuthor, favoriteAuthors, getAuthorBooks };

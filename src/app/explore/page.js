@@ -6,23 +6,24 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getPosts } from '../../api/postData';
-import BookCard from '../../components/PostCard';
+import PostCard from '../../components/PostCard';
+// import { useAuth } from '../../utils/context/authContext';
 
 function Home() {
   // TODO: Set a state for books
-  const [books, setBooks] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   // TODO: Get user ID using useAuth Hook
   // const { user } = useAuth();
 
   // TODO: create a function that makes the API call to get all the books
-  const getAllThePosts = () => {
-    getPosts().then(setBooks);
-  };
+  // const getAllThePosts = () => {
+  //   getPosts().then(setPosts);
+  // };
 
   // TODO: make the call to the API to get all the books on component render
   useEffect(() => {
-    getAllThePosts();
+    getPosts().then((data) => setPosts(data));
   }, []);
 
   return (
@@ -32,8 +33,8 @@ function Home() {
       </Link>
       <div className="d-flex flex-wrap">
         {/* TODO: map over books here using BookCard component */}
-        {books.map((book) => (
-          <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getAllThePosts} />
+        {posts.map((post) => (
+          <PostCard key={post.id} postObj={post} />
         ))}
       </div>
     </div>
