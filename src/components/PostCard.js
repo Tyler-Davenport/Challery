@@ -1,62 +1,46 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { deleteBook } from '../api/postData';
+import { getArtists } from '../api/artistData';
 
-function BookCard({ bookObj, onUpdate }) {
-  // FOR DELETE, WE NEED TO REMOVE THE BOOK AND HAVE THE VIEW RERENDER,
-  // SO WE PASS THE FUNCTION FROM THE PARENT THAT GETS THE BOOKS
-  const deleteThisBook = () => {
-    if (window.confirm(`Delete ${bookObj.title}?`)) {
-      deleteBook(bookObj.firebaseKey).then(() => onUpdate());
-    }
-  };
+function PostCard({ postObj }) {
+  const [artistData, setArtistData] = useState([]);
+
+  useEffect(() => {
+    getArtists(postObj.artistId).then((data) => {
+      setArtistData(data);
+    });
+  }, []);
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
-      <Card.Img variant="top" src={bookObj.image} alt={bookObj.title} style={{ height: '400px' }} />
+      <Card.Img variant="top" src={postObj.art} style={{ height: '400px' }} />
       <Card.Body>
-        <Card.Title>{bookObj.title}</Card.Title>
-        <p className="card-text bold">
-          {bookObj.sale && (
-            <span>
-              SALE
-              <br />
-            </span>
-          )}{' '}
-          ${bookObj.price}
-        </p>
-        {/* DYNAMIC LINK TO VIEW THE BOOK DETAILS  */}
-        <Link href={`/book/${bookObj.firebaseKey}`} passHref>
+        <Card.Title>{artistData.length > 0 ? artistData[0].displayName : 'Loading...'}</Card.Title>
+        <p className="card-text bold">{postObj.price}</p>
+        <Link href={`/book/${postObj.artistId}`} passHref>
           <Button variant="primary" className="m-2">
             VIEW
           </Button>
         </Link>
-        {/* DYNAMIC LINK TO EDIT THE BOOK DETAILS  */}
-        <Link href={`/book/edit/${bookObj.firebaseKey}`} passHref>
+        <Link href={`/book/edit/${postObj.artistId}`} passHref>
           <Button variant="info">EDIT</Button>
         </Link>
-        <Button variant="danger" onClick={deleteThisBook} className="m-2">
-          DELETE
-        </Button>
       </Card.Body>
     </Card>
   );
 }
 
-BookCard.propTypes = {
-  bookObj: PropTypes.shape({
-    image: PropTypes.string,
-    title: PropTypes.string,
-    sale: PropTypes.bool,
-    price: PropTypes.string,
-    firebaseKey: PropTypes.string,
+PostCard.propTypes = {
+  postObj: PropTypes.shape({
+    art: PropTypes.string.isRequired,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    artistId: PropTypes.string.isRequired,
   }).isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };
 
-export default BookCard;
+export default PostCard;
