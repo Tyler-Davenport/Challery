@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { getSingleBook } from '@/api/bookData';
 import BookForm from '@/components/forms/BookForm';
 import PropTypes from 'prop-types';
+import { getSinglePost } from '../../../../api/postData';
 
 export default function EditBook({ params }) {
   const [editItem, setEditItem] = useState({});
@@ -12,7 +12,7 @@ export default function EditBook({ params }) {
 
   // TODO: make a call to the API to get the book data
   useEffect(() => {
-    getSingleBook(firebaseKey).then(setEditItem);
+    getSinglePost(firebaseKey).then(setEditItem);
   }, [firebaseKey]);
 
   // TODO: pass object to form
