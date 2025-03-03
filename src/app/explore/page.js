@@ -3,8 +3,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Button } from 'react-bootstrap';
 import { getPosts } from '../../api/postData';
 import PostCard from '../../components/PostCard';
 // import { useAuth } from '../../utils/context/authContext';
@@ -28,11 +26,8 @@ function Home() {
 
   return (
     <div className="text-center my-4">
-      <Link href="/book/new" passHref>
-        <Button>Add A Book</Button>
-      </Link>
       <div className="d-flex flex-wrap">
-        {/* TODO: map over books here using BookCard component */}
+        {/* TODO: map over posts here using BookCard component */}
         {posts.map((post) => (
           <PostCard key={post.id} postObj={post} />
         ))}
