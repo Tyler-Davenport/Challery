@@ -14,9 +14,15 @@ import { deletePost } from '../api/postData';
 import { useAuth } from '../utils/context/authContext';
 import ArtModal from './artModal';
 
-function PostCard({ postObj }) {
+function PostCard({ postObj, onUpdate }) {
   const [artistData, setArtistData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
+
+  const deleteThisPost = () => {
+    if (window.confirm(`Delete Post?`)) {
+      deletePost(postObj.firebaseKey).then(() => onUpdate());
+    }
+  };
 
   const { user } = useAuth();
 
@@ -51,7 +57,7 @@ function PostCard({ postObj }) {
             <Link href={`/tea/edit/${postObj.firebaseKey}`} passHref>
               <Button variant="info">EDIT</Button>
             </Link>
-            <Button variant="danger" onClick={deletePost} className="m-2">
+            <Button variant="danger" onClick={deleteThisPost} className="m-2">
               DELETE
             </Button>
           </>
@@ -70,6 +76,7 @@ PostCard.propTypes = {
     firebaseKey: PropTypes.string.isRequired,
     uid: PropTypes.string.isRequired,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default PostCard;
