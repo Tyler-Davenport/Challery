@@ -9,7 +9,7 @@ import { Badge } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { getArtists } from '../api/artistData';
-import getCategoryById from '../api/categoryData';
+import { getCategoryById } from '../api/categoryData.js';
 import { deletePost } from '../api/postData';
 import { useAuth } from '../utils/context/authContext';
 import ArtModal from './artModal';

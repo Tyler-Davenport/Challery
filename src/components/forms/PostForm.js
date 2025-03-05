@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -7,29 +9,27 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { getAuthors } from '../../api/authorData';
-import { createBook, updateBook } from '../../api/bookData';
+import { createPost, updatePost } from '../../api/postData';
+import { getCategories } from '../../api/categoryData';
 
 const initialState = {
-  description: '',
-  image: '',
+  art: '',
   price: '',
-  sale: false,
-  title: '',
-  author_id: '',
+  artistId: '',
+  categoryId: '',
 };
 
-function BookForm({ obj = initialState }) {
+function PostForm({ obj = initialState }) {
   const [formInput, setFormInput] = useState(obj);
-  const [authors, setAuthors] = useState([]);
+  const [categories, setCategories] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    getAuthors(user.uid).then(setAuthors);
+    getCategories().then(setCategories);
 
     if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,13 +42,13 @@ function BookForm({ obj = initialState }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
-      updateBook(formInput).then(() => router.push(`/book/${obj.firebaseKey}`));
+      updatePost(formInput).then(() => router.push(`/Post/${obj.firebaseKey}`));
     } else {
       const payload = { ...formInput, uid: user.uid };
-      createBook(payload).then(({ name }) => {
+      createPost(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
-        updateBook(patchPayload).then(() => {
-          router.push('/');
+        updatePost(patchPayload).then(() => {
+          router.push('/profile');
         });
       });
     }
@@ -56,42 +56,42 @@ function BookForm({ obj = initialState }) {
 
   return (
     <Form onSubmit={handleSubmit} className="text-black">
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Book</h2>
+      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Post</h2>
 
       {/* TITLE INPUT  */}
-      <FloatingLabel controlId="floatingInput1" label="Book Title" className="mb-3">
+      {/* <FloatingLabel controlId="floatingInput1" label="Book Title" className="mb-3">
         <Form.Control type="text" placeholder="Enter a title" name="title" value={formInput.title} onChange={handleChange} required />
-      </FloatingLabel>
+      </FloatingLabel> */}
 
       {/* IMAGE INPUT  */}
-      <FloatingLabel controlId="floatingInput2" label="Book Image" className="mb-3">
-        <Form.Control type="url" placeholder="Enter an image url" name="image" value={formInput.image} onChange={handleChange} required />
+      <FloatingLabel controlId="floatingInput2" label="Your Masterpiece URL" className="mb-3">
+        <Form.Control type="url" placeholder="Your Masterpiece URL" name="art" value={formInput.art} onChange={handleChange} required />
       </FloatingLabel>
 
       {/* PRICE INPUT  */}
-      <FloatingLabel controlId="floatingInput3" label="Book Price" className="mb-3">
-        <Form.Control type="text" placeholder="Enter price" name="price" value={formInput.price} onChange={handleChange} required />
+      <FloatingLabel controlId="floatingInput3" label="Art Price" className="mb-3">
+        <Form.Control type="text" placeholder="Name your price" name="price" value={formInput.price} onChange={handleChange} required />
       </FloatingLabel>
 
       {/* AUTHOR SELECT  */}
-      <FloatingLabel controlId="floatingSelect" label="Author">
-        <Form.Select aria-label="Author" name="author_id" onChange={handleChange} className="mb-3" value={formInput.author_id || ''} required>
-          <option value="">Select an Author</option>
-          {authors.map((author) => (
-            <option key={author.firebaseKey} value={author.firebaseKey}>
-              {author.first_name} {author.last_name}
+      <FloatingLabel controlId="floatingSelect" label="Category">
+        <Form.Select aria-label="Category" name="categoryId" onChange={handleChange} className="mb-3" value={formInput.categoryId || ''} required>
+          <option value="">Select a Category</option>
+          {categories.map((category) => (
+            <option key={category.firebaseKey} value={category.firebaseKey}>
+              {category.tagName}
             </option>
           ))}
         </Form.Select>
       </FloatingLabel>
 
       {/* DESCRIPTION TEXTAREA  */}
-      <FloatingLabel controlId="floatingTextarea" label="Description" className="mb-3">
+      {/* <FloatingLabel controlId="floatingTextarea" label="Description" className="mb-3">
         <Form.Control as="textarea" placeholder="Description" style={{ height: '100px' }} name="description" value={formInput.description} onChange={handleChange} required />
-      </FloatingLabel>
+      </FloatingLabel> */}
 
       {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
-      <Form.Check
+      {/* <Form.Check
         className="text-white mb-3"
         type="switch"
         id="sale"
@@ -104,24 +104,22 @@ function BookForm({ obj = initialState }) {
             sale: e.target.checked,
           }));
         }}
-      />
+      /> */}
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Book</Button>
+      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Post</Button>
     </Form>
   );
 }
 
-BookForm.propTypes = {
+PostForm.propTypes = {
   obj: PropTypes.shape({
-    description: PropTypes.string,
-    image: PropTypes.string,
+    art: PropTypes.string,
     price: PropTypes.string,
-    sale: PropTypes.bool,
-    title: PropTypes.string,
-    author_id: PropTypes.string,
+    artistId: PropTypes.string,
+    categoryId: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
 };
 
-export default BookForm;
+export default PostForm;

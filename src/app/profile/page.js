@@ -24,8 +24,8 @@ export default function MyPostsPage() {
 
   return (
     <div className="text-center my-4">
-      <Link href="/book/new" passHref>
-        <Button>Add A Book</Button>
+      <Link href="/profile/new" passHref>
+        <Button>Add A Post</Button>
       </Link>
       <h1>Created Posts</h1>
       <div className="d-flex flex-wrap">

@@ -21,5 +21,17 @@ const getCategoryById = (id) =>
       .catch(reject);
   });
 
-  
-  export default getCategoryById
+const getCategories = () =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/category.json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(Object.values(data)))
+      .catch(reject);
+  });
+
+export { getCategoryById, getCategories };
