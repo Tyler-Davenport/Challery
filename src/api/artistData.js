@@ -54,6 +54,16 @@ const getSingleArtist = (firebaseKey) =>
       .catch(reject);
   });
 
+const getSingleArtistByUid = async (uid) =>
+  fetch(`${endpoint}/artist.json?orderBy="uid"&equalTo="${uid}"`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        const artistArray = Object.values(data);
+        return artistArray.length > 0 ? artistArray[0] : null; // Return the first artist found
+      }
+      return null;
+    });
 // FIXME: DELETE AUTHOR
 // const deleteSingleAuthor = (firebaseKey) =>
 //   new Promise((resolve, reject) => {
@@ -90,4 +100,4 @@ const getSingleArtist = (firebaseKey) =>
 //       .catch(reject);
 //   });
 
-export { getArtists, getSingleArtist };
+export { getArtists, getSingleArtist, getSingleArtistByUid };
