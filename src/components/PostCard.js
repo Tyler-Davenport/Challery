@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { Badge } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
+import styles from '@/styles/PostCard.module.css'; // Importing the CSS module
 import { getArtists } from '../api/artistData';
 import { getCategoryById } from '../api/categoryData.js';
 import { deletePost } from '../api/postData';
@@ -35,13 +36,13 @@ function PostCard({ postObj, onUpdate }) {
   }, [postObj.categoryId]);
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
-      <Card.Img variant="top" src={postObj.art} style={{ height: '400px' }} />
+    <Card className={styles.postCard}>
+      <Card.Img variant="top" src={postObj.art} className={styles.cardImage} />
       <Card.Body>
-        <Card.Title>{artistData.length > 0 ? artistData[0].displayName : 'Loading...'}</Card.Title>
-        <p className="card-text bold">{postObj.price}</p>
+        <Card.Title className={styles.cardTitle}>{artistData.length > 0 ? artistData[0].displayName : 'Loading...'}</Card.Title>
+        <p className={styles.cardPrice}>${postObj.price}</p>
         <p>
-          <Badge pill bg="dark">
+          <Badge pill bg="dark" className={styles.badge}>
             {categoryData.length > 0 ? categoryData[0].tagName : 'Loading...'}
           </Badge>
         </p>
@@ -50,9 +51,11 @@ function PostCard({ postObj, onUpdate }) {
         {user.uid === postObj.uid && (
           <>
             <Link href={`/profile/edit/${postObj.firebaseKey}`} passHref>
-              <Button variant="info">EDIT</Button>
+              <Button variant="info" className={styles.cardButton}>
+                EDIT
+              </Button>
             </Link>
-            <Button variant="danger" onClick={deleteThisPost} className="m-2">
+            <Button variant="danger" onClick={deleteThisPost} className={`m-2 ${styles.cardButton}`}>
               DELETE
             </Button>
           </>

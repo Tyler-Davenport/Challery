@@ -14,7 +14,7 @@ function ArtModal({ postObj }) {
     <>
       {/* Info Button */}
       <Button variant="light" className="ButtonForModal" onClick={handleShow}>
-        Info
+        Expand Image
       </Button>
 
       {/* Modal */}
