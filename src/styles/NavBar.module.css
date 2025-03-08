@@ -1,0 +1,53 @@
+/* NavBar.module.css */
+
+/* Navbar background color */
+.navbar {
+  background-color: #a1c8a1; /* Darker chai latte-inspired green for better contrast */
+}
+
+/* Navbar brand style (Challery) */
+.navbarBrand {
+  color: #333333; /* Darker text color for better contrast */
+  font-family: 'Dancing Script', cursive; /* Artistic font */
+  font-size: 2.5rem; /* Larger font size */
+  font-weight: bold; /* Bold style */
+  text-transform: uppercase; /* Optional: Uppercase text */
+  letter-spacing: 2px; /* Optional: Add some spacing between letters */
+  text-decoration: none; /* Remove default underline */
+}
+
+/* Style for the navbar links */
+.navLink {
+  color: #2f2f2f; /* Darker color for the nav links to make them more readable */
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for nav links */
+.navLink:hover {
+  color: #d9f4c8; /* Slightly lighter color on hover for better visual effect */
+}
+
+/* Style for the navbar toggle button */
+.navbar-toggler {
+  border-color: #4d4d4d; /* Darker border for better visibility */
+}
+
+.navbar-toggler-icon {
+  background-color: #4d4d4d; /* Darker color for the toggle icon */
+}
+
+/* Style for the sign out button */
+.signOutButton {
+  background-color: #4d4d4d; /* Darker background color for contrast */
+  border: 1px solid #ffffff; /* White border */
+  color: #ffffff; /* White text */
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for the sign out button */
+.signOutButton:hover {
+  background-color: #a1c8a1; /* Match navbar background on hover */
+  border: 1px solid #a1c8a1; /* Match navbar background border color */
+  color: #333333; /* Dark text on hover to match the navbar text */
+}
