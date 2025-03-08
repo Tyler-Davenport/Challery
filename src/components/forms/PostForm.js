@@ -11,7 +11,7 @@ import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { createPost, updatePost } from '../../api/postData';
 import { getCategories } from '../../api/categoryData';
-import { getSingleArtistByUid } from '../../api/artistData'; // Fetch a single artist
+import { getSingleArtistByUid } from '../../api/artistData';
 
 const initialState = {
   art: '',
@@ -20,40 +20,38 @@ const initialState = {
   categoryId: '',
 };
 
-function PostForm({ obj = initialState }) {
-  const [formInput, setFormInput] = useState(obj);
+function PostForm({ obj = {} }) {
+  const [formInput, setFormInput] = useState(initialState);
   const [categories, setCategories] = useState([]);
   const [loadingArtist, setLoadingArtist] = useState(true);
   const router = useRouter();
   const { user } = useAuth();
 
+  // Load categories & set form data if editing
   useEffect(() => {
     getCategories().then(setCategories);
 
-    if (obj.firebaseKey) {
-      setFormInput(obj);
+    if (obj?.firebaseKey) {
+      setFormInput((prevState) => ({
+        ...prevState,
+        ...obj,
+      }));
     }
-  }, []);
+  }, [obj]);
 
+  // Fetch artist for current user
   useEffect(() => {
     if (user) {
-      console.log('Fetching artist for user:', user.uid); // Debugging
       getSingleArtistByUid(user.uid)
         .then((artist) => {
-          console.log('Fetched artist data:', artist); // Debugging
-
           if (artist?.firebaseKey) {
             setFormInput((prevState) => ({
               ...prevState,
               artistId: artist.firebaseKey,
             }));
-          } else {
-            console.warn('Artist not found for this user.');
           }
         })
-        .catch((error) => {
-          console.error('Error fetching artist:', error);
-        })
+        .catch(() => {})
         .finally(() => setLoadingArtist(false));
     }
   }, [user]);
@@ -69,36 +67,31 @@ function PostForm({ obj = initialState }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formInput.artistId) {
-      console.error('❌ Artist ID is missing. Cannot submit post.');
-      return;
-    }
+    if (!formInput.artistId) return;
 
-    if (obj.firebaseKey) {
-      updatePost(formInput).then(() => router.push(`/Post/${obj.firebaseKey}`));
+    if (obj?.firebaseKey) {
+      updatePost(formInput).then(() => router.push('/profile'));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createPost(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
-        updatePost(patchPayload).then(() => {
-          router.push('/profile');
-        });
+        updatePost(patchPayload).then(() => router.push('/profile'));
       });
     }
   };
 
   return (
     <Form onSubmit={handleSubmit} className="text-black">
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Post</h2>
+      <h2 className="text-white mt-5">{obj?.firebaseKey ? 'Update' : 'Create'} Post</h2>
 
       {loadingArtist && <p>Loading artist information...</p>}
 
       <FloatingLabel controlId="floatingInput2" label="Your Masterpiece URL" className="mb-3">
-        <Form.Control type="url" placeholder="Your Masterpiece URL" name="art" value={formInput.art} onChange={handleChange} required />
+        <Form.Control type="url" placeholder="Your Masterpiece URL" name="art" value={formInput.art || ''} onChange={handleChange} required />
       </FloatingLabel>
 
       <FloatingLabel controlId="floatingInput3" label="Art Price" className="mb-3">
-        <Form.Control type="text" placeholder="Name your price" name="price" value={formInput.price} onChange={handleChange} required />
+        <Form.Control type="text" placeholder="Name your price" name="price" value={formInput.price || ''} onChange={handleChange} required />
       </FloatingLabel>
 
       <FloatingLabel controlId="floatingSelect" label="Category">
@@ -113,7 +106,7 @@ function PostForm({ obj = initialState }) {
       </FloatingLabel>
 
       <Button type="submit" disabled={loadingArtist || !formInput.artistId}>
-        {obj.firebaseKey ? 'Update' : 'Create'} Post
+        {obj?.firebaseKey ? 'Update' : 'Create'} Post
       </Button>
     </Form>
   );

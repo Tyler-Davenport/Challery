@@ -27,15 +27,11 @@ function PostCard({ postObj, onUpdate }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    getArtists(postObj.artistId).then((data) => {
-      setArtistData(data);
-    });
+    getArtists(postObj.artistId).then(setArtistData);
   }, [postObj.artistId]);
 
   useEffect(() => {
-    getCategoryById(postObj.categoryId).then((data) => {
-      setCategoryData(data);
-    });
+    getCategoryById(postObj.categoryId).then(setCategoryData);
   }, [postObj.categoryId]);
 
   return (
@@ -45,16 +41,15 @@ function PostCard({ postObj, onUpdate }) {
         <Card.Title>{artistData.length > 0 ? artistData[0].displayName : 'Loading...'}</Card.Title>
         <p className="card-text bold">{postObj.price}</p>
         <p>
-          {' '}
           <Badge pill bg="dark">
             {categoryData.length > 0 ? categoryData[0].tagName : 'Loading...'}
-          </Badge>{' '}
+          </Badge>
         </p>
         <ArtModal postObj={postObj} />
 
         {user.uid === postObj.uid && (
           <>
-            <Link href={`/tea/edit/${postObj.firebaseKey}`} passHref>
+            <Link href={`/profile/edit/${postObj.firebaseKey}`} passHref>
               <Button variant="info">EDIT</Button>
             </Link>
             <Button variant="danger" onClick={deleteThisPost} className="m-2">
