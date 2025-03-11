@@ -2,33 +2,31 @@
 
 ## Overview
 
-"This is a digital art marketplace that allows users to buy and sell unique digital art."
+This is a digital art marketplace that allows users to buy and sell unique digital art.
 
 ---
 
 ## Links
 
-- **Wireframes/Prototype**: [Insert link to wireframes/prototype]
-- **Live Project**: [Insert link to live, deployed project]
-- **Project Board**: [Insert link to your project board]
+- **Wireframes/Prototype**: https://www.figma.com/board/7OHDIt8J52AtHtjiXtFp9Z/Challery?node-id=0-1&p=f&t=Rc0wGm5u3ApXJi1b-0
+- **Live Project**: https://challery.netlify.app/
+- **Project Board**: https://github.com/users/Tyler-Davenport/projects/2
 
 ---
 
 ## User Description
 
-Describe the intended users of your app. Who will benefit from this app? For example: "The primary users of this app are digital artists looking to sell their artwork and art enthusiasts looking to purchase unique, high-quality digital art pieces."
+The primary users of this app are digital artists looking to sell their artwork and art enthusiasts and hobbyists looking to purchase unique, high-quality digital art pieces.
 
 ---
 
 ## Features
 
-- Feature 1: Brief description of this feature.
-- Feature 2: Brief description of this feature.
-- Feature 3: Brief description of this feature.
-- Feature 4: Brief description of this feature.
-- Feature 5: Brief description of this feature.
-
-*Example features could include user authentication, search functionality, chat messaging between buyers and sellers, payment processing, etc.*
+- Feature 1: Explore page that shows all users' posts.
+- Feature 2: A profile page that will show your information and your own posts.
+- Feature 3: The ability to create, edit, and delete your own posts.
+- Feature 4: You can expand any image in a modal to get a better look at the art.
+- Feature 5: Google authentication to login and out od the application.
 
 ---
 
@@ -36,27 +34,14 @@ Describe the intended users of your app. Who will benefit from this app? For exa
 
 Include screenshots of the project here. For example:
 
+<img width="1275" alt="Screenshot 2025-03-10 183329" src="https://github.com/user-attachments/assets/63d97701-ef8d-465a-8a4c-2c9d9fa7a592" />
 
-<img width="1275" alt="Screenshot 2025-03-10 183329" src="https://github.com/user-attachments/assets/170f0181-b28b-4ffb-8e51-34c0443303e0" />
-
-<img width="1280" alt="Screenshot 2025-03-10 183258" src="https://github.com/user-attachments/assets/672578d0-d942-484f-bc27-4f883845fa54" />
-
----
-
-## Contributors
-
-- [Contributor 1 Name](https://github.com/contributor1) - Role/Description
-- [Contributor 2 Name](https://github.com/contributor2) - Role/Description
-- [Contributor 3 Name](https://github.com/contributor3) - Role/Description
+<img width="1280" alt="Screenshot 2025-03-10 183258" src="https://github.com/user-attachments/assets/1ce2ae0c-3eee-4eef-9548-8a855b8df37a" />
 
 ---
 
 ## Loom Walkthrough
 
-Watch the project walkthrough video here: [Insert Loom video link] (Keep it under 1 minute)
+Watch the project walkthrough video here: https://www.loom.com/share/f5da0b025c2b44569501915c143df032
 
 ---
-
-## Additional Notes
-
-Any other information that might be useful to someone looking at your project, such as installation instructions, dependencies, or additional context, can go here.
