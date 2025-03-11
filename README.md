@@ -36,8 +36,10 @@ Describe the intended users of your app. Who will benefit from this app? For exa
 
 Include screenshots of the project here. For example:
 
-![Screenshot 1](link-to-screenshot1.png)
-![Screenshot 2](link-to-screenshot2.png)
+
+<img width="1275" alt="Screenshot 2025-03-10 183329" src="https://github.com/user-attachments/assets/170f0181-b28b-4ffb-8e51-34c0443303e0" />
+
+<img width="1280" alt="Screenshot 2025-03-10 183258" src="https://github.com/user-attachments/assets/672578d0-d942-484f-bc27-4f883845fa54" />
 
 ---
 
