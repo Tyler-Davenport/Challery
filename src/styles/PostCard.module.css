@@ -128,17 +128,13 @@
   display: inline-block;
 }
 
-.watermarkFallback {
-  opacity: 0.8;
-}
-
-.watermarkText {
+.watermark {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 40px;
+  font-size: 2rem;
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.5);
   pointer-events: none;
 }

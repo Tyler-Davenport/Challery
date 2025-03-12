@@ -14,8 +14,6 @@ import ArtModal from './artModal';
 function PostCard({ postObj, onUpdate }) {
   const [artistData, setArtistData] = useState(null);
   const [categoryData, setCategoryData] = useState(null);
-  const [watermarkedImage, setWatermarkedImage] = useState(postObj.art);
-  const [watermarkFailed, setWatermarkFailed] = useState(false);
 
   const { user } = useAuth();
 
@@ -33,52 +31,11 @@ function PostCard({ postObj, onUpdate }) {
       .catch(() => setCategoryData(null));
   }, [postObj.categoryId]);
 
-  useEffect(() => {
-    const addWatermark = async () => {
-      if (!postObj.art || !artistData?.displayName) return;
-
-      try {
-        const response = await fetch(postObj.art, { mode: 'cors' });
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-        const blob = await response.blob();
-        const imgURL = URL.createObjectURL(blob);
-
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const img = new Image();
-
-        img.src = imgURL;
-        img.crossOrigin = 'Anonymous';
-        img.onload = () => {
-          canvas.width = img.width;
-          canvas.height = img.height;
-          ctx.drawImage(img, 0, 0, img.width, img.height);
-
-          // Watermark settings
-          ctx.font = `${img.width / 15}px Arial`;
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(artistData.displayName, img.width / 2, img.height / 2);
-
-          setWatermarkedImage(canvas.toDataURL('image/png'));
-        };
-
-        img.onerror = () => setWatermarkFailed(true);
-      } catch {
-        setWatermarkFailed(true);
-      }
-    };
-
-    addWatermark();
-  }, [postObj.art, artistData]);
-
   return (
     <Card className={styles.postCard}>
-      <div className={watermarkFailed ? styles.imageWrapper : ''}>
-        <Card.Img variant="top" src={watermarkedImage} className={`${styles.cardImage} ${watermarkFailed ? styles.watermarkFallback : ''}`} alt="Artwork" />
-        {watermarkFailed && <span className={styles.watermarkText}>{artistData?.displayName || 'Watermark'}</span>}
+      <div className={styles.imageWrapper}>
+        <Card.Img variant="top" src={postObj.art} className={styles.cardImage} alt="Artwork" />
+        <span className={styles.watermark}>{artistData?.displayName || 'Watermark'}</span>
       </div>
       <Card.Body>
         {artistData ? (
