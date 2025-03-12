@@ -76,6 +76,24 @@
   justify-content: center;
 }
 
+/* Expand button styling */
+.expandButton button {
+  background-color: #F5F1E3 !important; /* Soft cream from hero section */
+  border: 2px solid #E3DAC9 !important; /* Slightly darker cream border */
+  color: black !important; /* Dark text */
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Expand button hover effect */
+.expandButton button:hover {
+  background-color: #E3DAC9 !important; /* Slightly darker cream */
+  color: black !important; /* Ensures text remains readable */
+  transform: scale(1.05);
+}
+
 /* Ensuring proper spacing between buttons */
 .buttonContainer {
   display: flex;
