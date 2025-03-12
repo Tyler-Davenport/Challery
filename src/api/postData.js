@@ -122,6 +122,19 @@ const getPostsByArtistId = (artistId) =>
       .catch(reject);
   });
 
+const getPostsBycategoryId = (categoryId) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/post.json?orderBy="categoryId"&equalTo="${categoryId}"`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(Object.values(data)))
+      .catch(reject);
+  });
+
 // const booksOnSale = (uid) =>
 //   new Promise((resolve, reject) => {
 //     fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
@@ -138,4 +151,4 @@ const getPostsByArtistId = (artistId) =>
 //       .catch(reject);
 //   });
 
-export { getPosts, getPostsByUid, createPost, deletePost, getSinglePost, updatePost, getPostsByArtistId, getUserPosts };
+export { getPosts, getPostsByUid, createPost, deletePost, getSinglePost, updatePost, getPostsByArtistId, getUserPosts, getPostsBycategoryId };

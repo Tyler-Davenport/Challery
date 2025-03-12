@@ -134,7 +134,7 @@ export default function LandingPage() {
           height={500} // Specify a height
         />
         <h1 className={styles.heroTitle}>Welcome to Challery</h1>
-        <p className={styles.heroSubtitle}>Discover and showcase stunning digital art</p>
+        <p className={styles.heroSubtitle}>Your internet destination for buying and selling digital art. Perfect for artists, tabletop and video gamers, new and upcoming businesses and more!</p>
         <Link href="/explore" passHref>
           <Button className={styles.ctaButton}>Explore Art</Button>
         </Link>
