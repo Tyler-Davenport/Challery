@@ -1,13 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
+import styles from '@/styles/PostForm.module.css'; // Importing the CSS module
+import { useRouter } from 'next/navigation';
 import { useAuth } from '../../utils/context/authContext';
 import { createPost, updatePost } from '../../api/postData';
 import { getCategories } from '../../api/categoryData';
@@ -24,6 +23,7 @@ function PostForm({ obj = {} }) {
   const [formInput, setFormInput] = useState(initialState);
   const [categories, setCategories] = useState([]);
   const [loadingArtist, setLoadingArtist] = useState(true);
+  const [artist, setArtist] = useState(null); // Define artist state
   const router = useRouter();
   const { user } = useAuth();
 
@@ -43,11 +43,12 @@ function PostForm({ obj = {} }) {
   useEffect(() => {
     if (user) {
       getSingleArtistByUid(user.uid)
-        .then((artist) => {
-          if (artist?.firebaseKey) {
+        .then((artistData) => {
+          if (artistData?.firebaseKey) {
+            setArtist(artistData); // Set artist state
             setFormInput((prevState) => ({
               ...prevState,
-              artistId: artist.firebaseKey,
+              artistId: artistData.firebaseKey,
             }));
           }
         })
@@ -67,35 +68,37 @@ function PostForm({ obj = {} }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formInput.artistId) return;
+    // Check if artist is loaded and if artistId is set
+    if (!formInput.artistId || !artist?.firebaseKey) return;
 
     if (obj?.firebaseKey) {
-      updatePost(formInput).then(() => router.push('/profile'));
+      // If it's an update, use the artist's firebaseKey
+      updatePost(formInput).then(() => router.push(`/profile/${artist.firebaseKey}`));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createPost(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
-        updatePost(patchPayload).then(() => router.push('/profile'));
+        updatePost(patchPayload).then(() => router.push(`/profile/${artist.firebaseKey}`));
       });
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="text-black">
-      <h2 className="text-white mt-5">{obj?.firebaseKey ? 'Update' : 'Create'} Post</h2>
+    <Form onSubmit={handleSubmit} className={`text-black ${styles.formContainer}`}>
+      <h2 className={`text-white mt-5 ${styles.formTitle}`}>{obj?.firebaseKey ? 'Update' : 'Create'} Post</h2>
 
-      {loadingArtist && <p>Loading artist information...</p>}
+      {loadingArtist && <p className={styles.loadingText}>Loading artist information...</p>}
 
-      <FloatingLabel controlId="floatingInput2" label="Your Masterpiece URL" className="mb-3">
-        <Form.Control type="url" placeholder="Your Masterpiece URL" name="art" value={formInput.art || ''} onChange={handleChange} required />
+      <FloatingLabel controlId="floatingInput2" label="Your Masterpiece URL" className={`mb-3 ${styles.inputField}`}>
+        <Form.Control type="url" placeholder="Your Masterpiece URL" name="art" value={formInput.art || ''} onChange={handleChange} required className={styles.input} />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput3" label="Art Price" className="mb-3">
-        <Form.Control type="text" placeholder="Name your price" name="price" value={formInput.price || ''} onChange={handleChange} required />
+      <FloatingLabel controlId="floatingInput3" label="Art Price" className={`mb-3 ${styles.inputField}`}>
+        <Form.Control type="text" placeholder="Name your price" name="price" value={formInput.price || ''} onChange={handleChange} required className={styles.input} />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingSelect" label="Category">
-        <Form.Select aria-label="Category" name="categoryId" onChange={handleChange} className="mb-3" value={formInput.categoryId || ''} required>
+      <FloatingLabel controlId="floatingSelect" label="Category" className={styles.inputField}>
+        <Form.Select aria-label="Category" name="categoryId" onChange={handleChange} className={`mb-3 ${styles.select}`} value={formInput.categoryId || ''} required>
           <option value="">Select a Category</option>
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
@@ -105,7 +108,7 @@ function PostForm({ obj = {} }) {
         </Form.Select>
       </FloatingLabel>
 
-      <Button type="submit" disabled={loadingArtist || !formInput.artistId}>
+      <Button type="submit" disabled={loadingArtist || !formInput.artistId} className={styles.submitButton}>
         {obj?.firebaseKey ? 'Update' : 'Create'} Post
       </Button>
     </Form>

@@ -21,12 +21,53 @@ const getArtists = (firebaseKey) =>
       .catch(reject);
   });
 
+const getArtistByUid = (uid) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/artist.json?orderBy="uid"&equalTo="${uid}"`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(Object.values(data)))
+      .catch(reject);
+  });
+
+const createArtist = (payload) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/artist.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+const updateArtist = (payload) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/artist/${payload.firebaseKey}.json`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
 // FIXME: CREATE AUTHOR
 // const createAuthor = () => {};
 
-// // get artist by id
-// export const getArtistById = (artistId) =>
-//   fetch(`${endpoint}/artist.json?orderBy="firebaseKey"&equalTo="${artistId}"`, {
+// get artist by id
+// const getArtistByfirebaseKey = (firebaseKey) =>
+//   fetch(`${endpoint}/artist.json?orderBy="firebaseKey"&equalTo="${firebaseKey}"`, {
 //     method: 'GET',
 //     headers: { 'Content-Type': 'application/json' },
 //   })
@@ -81,9 +122,6 @@ const getSingleArtistByUid = async (uid) =>
 // FIXME: UPDATE AUTHOR
 // const updateAuthor = () => {};
 
-// TODO: GET A SINGLE AUTHOR'S BOOKS
-// const getAuthorBooks = () => {};
-
 // const favoriteAuthors = (uid) =>
 //   new Promise((resolve, reject) => {
 //     fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
@@ -100,4 +138,4 @@ const getSingleArtistByUid = async (uid) =>
 //       .catch(reject);
 //   });
 
-export { getArtists, getSingleArtist, getSingleArtistByUid };
+export { getArtists, getSingleArtist, getSingleArtistByUid, createArtist, updateArtist, getArtistByUid };
