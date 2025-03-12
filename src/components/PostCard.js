@@ -16,8 +16,8 @@ import { useAuth } from '../utils/context/authContext';
 import ArtModal from './artModal';
 
 function PostCard({ postObj, onUpdate }) {
-  const [artistData, setArtistData] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
+  const [artistData, setArtistData] = useState(null);
+  const [categoryData, setCategoryData] = useState(null);
 
   const deleteThisPost = () => {
     if (window.confirm(`Delete Post?`)) {
@@ -28,25 +28,45 @@ function PostCard({ postObj, onUpdate }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    getArtists(postObj.artistId).then(setArtistData);
+    getArtists(postObj.artistId).then((data) => setArtistData(data?.[0] || null));
   }, [postObj.artistId]);
 
   useEffect(() => {
-    getCategoryById(postObj.categoryId).then(setCategoryData);
+    getCategoryById(postObj.categoryId)
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setCategoryData(data[0]); // Take the first category object
+        } else {
+          setCategoryData(null);
+        }
+      })
+      .catch(() => setCategoryData(null)); // Handle errors gracefully
   }, [postObj.categoryId]);
 
   return (
     <Card className={styles.postCard}>
       <Card.Img variant="top" src={postObj.art} className={styles.cardImage} />
       <Card.Body>
-        <Card.Title className={styles.cardTitle}>{artistData.length > 0 ? artistData[0].displayName : 'Loading...'}</Card.Title>
+        {/* Artist Name as a Clickable Link */}
+        {artistData ? (
+          <Link href={`/profile/${artistData.firebaseKey}`} passHref>
+            <Card.Title className={`${styles.cardTitle} ${styles.profileLink}`}>{artistData.displayName}</Card.Title>
+          </Link>
+        ) : (
+          <Card.Title className={styles.cardTitle}>Loading...</Card.Title>
+        )}
+
         <p className={styles.cardPrice}>${postObj.price}</p>
         <p>
           <Badge pill bg="dark" className={styles.badge}>
-            {categoryData.length > 0 ? categoryData[0].tagName : 'Loading...'}
+            {categoryData && categoryData.tagName ? categoryData.tagName : 'Loading...'}
           </Badge>
         </p>
-        <ArtModal postObj={postObj} />
+
+        {/* Expand Image Button with Margin Fix */}
+        <div className={styles.expandButton}>
+          <ArtModal postObj={postObj} />
+        </div>
 
         {user.uid === postObj.uid && (
           <>

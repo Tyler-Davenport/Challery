@@ -2,63 +2,86 @@
 
 /* Page container */
 .pageContainer {
-    background-color: #f4f7f4; /* Light background to match the theme */
-    padding: 20px;
-  }
-  
-  /* Profile card styling */
-  .profileCard {
-    background-color: #a1c8a1; /* Darker chai latte-inspired green */
-    color: #333333; /* Dark text for contrast */
-    border-radius: 8px;
-  }
-  
-  /* Profile image styling */
-  .profileImage {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-  }
-  
-  /* Artist name styling */
-  .artistName {
-    color: #333333; /* Darker color for artist name */
-    font-weight: bold;
-  }
-  
-  /* Button for adding posts */
-  .addPostButton {
-    background-color: #4d4d4d; /* Darker gray background for the button */
-    border: 1px solid #ffffff; /* White border for contrast */
-    color: #ffffff; /* White text */
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-  }
-  
-  /* Button hover effect */
-  .addPostButton:hover {
-    background-color: #a1c8a1; /* Match navbar background on hover */
-    border: 1px solid #a1c8a1; /* Match navbar background border color */
-    color: #333333; /* Dark text on hover to match the navbar text */
-  }
-  
-  /* Heading for created posts */
-  .createdPostsHeading {
-    color: #333333; /* Dark text color for the heading */
-    font-size: 2rem;
-    margin-top: 30px;
-  }
-  
-  /* Styling for post cards */
-  .postCard {
-    margin: 10px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  /* Hover effect for post cards */
-  .postCard:hover {
-    transform: translateY(-10px);
-  }
-  
+  background-color: #f4f7f4; /* Light background to match the theme */
+  padding: 20px;
+}
+
+/* Profile card styling */
+.profileCard {
+  background-color: #a1c8a1; /* Darker chai latte-inspired green */
+  color: #333333; /* Dark text for contrast */
+  border-radius: 8px;
+}
+
+/* Profile image styling */
+.profileImage {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+/* Artist name styling */
+.artistName {
+  color: #333333; /* Darker color for artist name */
+  font-weight: bold;
+}
+
+/* Button for adding posts */
+.addPostButton {
+  background-color: #4d4d4d; /* Darker gray background for the button */
+  border: 1px solid #ffffff; /* White border for contrast */
+  color: #ffffff; /* White text */
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Button hover effect */
+.addPostButton:hover {
+  background-color: #a1c8a1; /* Match navbar background on hover */
+  border: 1px solid #a1c8a1; /* Match navbar background border color */
+  color: #333333; /* Dark text on hover to match the navbar text */
+}
+
+/* Heading for created posts */
+.createdPostsHeading {
+  color: #333333; /* Dark text color for the heading */
+  font-size: 2rem;
+  margin-top: 30px;
+}
+
+/* Styling for post cards */
+.postCard {
+  margin: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for post cards */
+.postCard:hover {
+  transform: translateY(-10px);
+}
+
+/* Edit Profile Button - Styled like PostCard Edit Button */
+.editProfileButton {
+  width: 200px; /* Ensures consistent width */
+  text-align: center;
+  margin-top: 10px; /* Adds some spacing */
+}
+
+/* Reuse PostCard button styling */
+.cardButton {
+  background-color: #4d4d4d; /* Dark gray */
+  border: 1px solid #ffffff; /* White border */
+  color: #ffffff; /* White text */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  width: 200px; /* Matches Edit/Delete buttons */
+  text-align: center;
+}
+
+/* Button hover effect */
+.cardButton:hover {
+  background-color: #a1c8a1; /* Match hover color */
+  border: 1px solid #a1c8a1;
+  color: #333333;
+}
