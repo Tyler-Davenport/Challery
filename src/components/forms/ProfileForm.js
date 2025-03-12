@@ -48,12 +48,19 @@ function ProfileForm({ obj = {} }) {
     setValidated(true);
 
     if (formInput?.firebaseKey) {
+      // If updating, keep existing createdAt value
       updateArtist(formInput).then(() => router.push(`/profile/${obj.firebaseKey}`));
     } else {
-      const payload = { ...formInput, uid: user.uid };
+      // If creating a new artist, add createdAt timestamp
+      const payload = {
+        ...formInput,
+        uid: user.uid,
+        createdAt: new Date().toISOString(), // Stores current timestamp
+      };
+
       createArtist(payload).then(({ name }) => {
         const patchPayload = { ...payload, firebaseKey: name };
-        updateArtist(patchPayload).then(() => router.push(`/profile/${obj.firebaseKey}`));
+        updateArtist(patchPayload).then(() => router.push(`/profile/${name}`));
       });
     }
   };
@@ -76,7 +83,7 @@ function ProfileForm({ obj = {} }) {
 
       <Row className="mb-3">
         <Form.Group as={Col} md="6" controlId="validationCustom03">
-          <Form.Label>Preffered Email To Be Contacted By</Form.Label>
+          <Form.Label>Preferred Email To Be Contacted By</Form.Label>
           <Form.Control type="email" className={styles.inputField} placeholder="Email" required value={formInput.contact} onChange={(e) => setFormInput({ ...formInput, contact: e.target.value })} />
         </Form.Group>
 
@@ -110,6 +117,7 @@ ProfileForm.propTypes = {
     payment: PropTypes.string,
     pfp: PropTypes.string,
     uid: PropTypes.string,
+    createdAt: PropTypes.string,
   }),
 };
 

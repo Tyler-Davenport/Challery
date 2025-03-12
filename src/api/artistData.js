@@ -2,6 +2,42 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
+const getRecentArtists = () =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/artist.json?orderBy="createdAt"&limitToLast=3`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          resolve(Object.values(data).reverse()); // Firebase returns oldest-first, so reverse it
+        } else {
+          resolve([]);
+        }
+      })
+      .catch(reject);
+  });
+
+const getAllArtists = () =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/artist.json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          resolve(Object.values(data)); // Convert object to array
+        } else {
+          resolve([]);
+        }
+      })
+      .catch(reject);
+  });
+
 const getArtists = (firebaseKey) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/artist.json?orderBy="firebaseKey"&equalTo="${firebaseKey}"`, {
@@ -138,4 +174,4 @@ const getSingleArtistByUid = async (uid) =>
 //       .catch(reject);
 //   });
 
-export { getArtists, getSingleArtist, getSingleArtistByUid, createArtist, updateArtist, getArtistByUid };
+export { getArtists, getAllArtists, getSingleArtist, getSingleArtistByUid, createArtist, updateArtist, getArtistByUid, getRecentArtists };

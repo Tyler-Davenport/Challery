@@ -1,0 +1,202 @@
+/* General Layout */
+.landingContainer {
+    background: linear-gradient(135deg, #A8CBB5, #E4E1C1); /* Chai Green Latte gradient */
+    min-height: 100vh;
+    padding: 50px 0;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Hero Section */
+  .heroSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+  }
+  
+  .logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+  }
+  
+  .heroTitle {
+    font-size: 48px;
+    font-weight: bold;
+    color: #4F7C44;
+    margin-bottom: 10px;
+  }
+  
+  .heroSubtitle {
+    font-size: 20px;
+    color: #6B6B6B;
+    margin-bottom: 20px;
+  }
+  
+  .ctaButton {
+    background-color: #4F7C44;
+    border: none;
+    font-size: 20px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .ctaButton:hover {
+    background-color: #3C5E36;
+    transform: scale(1.05);
+  }
+  
+  /* Recent Artists Section */
+  .recentArtistsSection {
+    max-width: 800px; /* Adjust this value as needed */
+    margin: auto; /* Centers the section */
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+  
+  .sectionTitle {
+    font-size: 32px;
+    color: #3C3C3C;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Carousel */
+  .carousel .carousel-item {
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    filter: invert(1); /* Makes controls visible on light background */
+  }
+  
+  /* Artist Cards */
+  .recentArtistCard {
+    display: flex;
+    background-color: var(--green-theme); /* Match your site's green theme */
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  .allArtistCard {
+    display: flex;
+    background-color: var(--green-theme);
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 15px;
+    margin: 15px 0;
+    min-height: 400px; /* Slightly taller for more content */
+    max-height: 400px;
+    min-width: 600px;
+    max-width: 600px;
+    width: 100%;
+}
+
+  .artistCardBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .celebrationMessage {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 128, 0, 0.2); /* Light green overlay */
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+.artistImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.artistInfo {
+    flex: 2;
+    text-align: left;
+    padding-left: 20px;
+  }
+
+  .artistBio {
+    font-size: 0.9rem;
+    color: #ddd;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+.welcomeSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F7F3E9;
+  padding: 15px;
+  border-radius: 12px 0 0 12px;
+}
+
+.welcomeMessage {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #333;
+}
+
+  
+  .artistCard:hover {
+    transform: scale(1.05); /* Fun hover effect */
+  }
+  
+  .artistImage {
+    width: 100%; /* Ensures the image fills the card width */
+    height: 200px; /* Fixed height to maintain uniformity */
+    object-fit: scale-down; /* Prevents stretching and ensures the image is properly cropped */
+    border-radius: 10px; /* Soft rounded corners */
+  }
+  
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #3C3C3C;
+  }
+  
+  /* All Artists Section */
+  .allArtistsSection {
+    margin-top: 60px;
+    padding: 40px;
+  }
+  
+  @media (max-width: 768px) {
+    .heroTitle {
+      font-size: 36px;
+    }
+  
+    .heroSubtitle {
+      font-size: 18px;
+    }
+  
+    .ctaButton {
+      font-size: 18px;
+      padding: 10px 25px;
+    }
+  
+    .sectionTitle {
+      font-size: 28px;
+    }
+  
+    .artistImage {
+      height: 200px;
+    }
+  }
+  
