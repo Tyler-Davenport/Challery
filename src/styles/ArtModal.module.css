@@ -1,0 +1,48 @@
+.modalHeader {
+    background-color: #f8f9fa;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .modalBody {
+    background-color: #ffffff;
+    color: #555;
+    border-radius: 20px;
+  }
+  
+  .modalTitle {
+    font-weight: bold;
+    color: #222;
+  }
+  
+  .modalDivider {
+    border-color: #ddd;
+  }
+  
+  .imageWrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .modalImage {
+    width: 100%;
+    border-radius: 8px;
+    opacity: 1;
+  }
+  
+  .watermarkFallback {
+    opacity: 0.8;
+  }
+  
+  .watermarkText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 70px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+  }
+  
