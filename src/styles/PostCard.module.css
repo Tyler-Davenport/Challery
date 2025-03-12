@@ -9,6 +9,14 @@
   padding: 15px; /* Adds spacing inside the card */
 }
 
+.cardHeader {
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
 /* Post card hover effect */
 .postCard:hover {
   transform: translateY(-5px);

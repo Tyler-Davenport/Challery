@@ -33,6 +33,7 @@ function PostCard({ postObj, onUpdate }) {
 
   return (
     <Card className={styles.postCard}>
+      <Card.Header className={styles.cardHeader}>{postObj.title}</Card.Header>
       <div className={styles.imageWrapper}>
         <Card.Img variant="top" src={postObj.art} className={styles.cardImage} alt="Artwork" />
         <span className={styles.watermark}>{artistData?.displayName || 'Watermark'}</span>
@@ -76,6 +77,7 @@ function PostCard({ postObj, onUpdate }) {
 
 PostCard.propTypes = {
   postObj: PropTypes.shape({
+    title: PropTypes.string.isRequired,
     art: PropTypes.string.isRequired,
     price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     artistId: PropTypes.string.isRequired,

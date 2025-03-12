@@ -13,6 +13,7 @@ import { getCategories } from '../../api/categoryData';
 import { getSingleArtistByUid } from '../../api/artistData';
 
 const initialState = {
+  title: '',
   art: '',
   price: '',
   artistId: '',
@@ -89,6 +90,10 @@ function PostForm({ obj = {} }) {
 
       {loadingArtist && <p className={styles.loadingText}>Loading artist information...</p>}
 
+      <FloatingLabel controlId="floatingInput1" label="Title" className={`mb-3 ${styles.inputField}`}>
+        <Form.Control type="text" placeholder="Enter title" name="title" value={formInput.title || ''} onChange={handleChange} required className={styles.input} />
+      </FloatingLabel>
+
       <FloatingLabel controlId="floatingInput2" label="Your Masterpiece URL" className={`mb-3 ${styles.inputField}`}>
         <Form.Control type="url" placeholder="Your Masterpiece URL" name="art" value={formInput.art || ''} onChange={handleChange} required className={styles.input} />
       </FloatingLabel>
@@ -117,6 +122,7 @@ function PostForm({ obj = {} }) {
 
 PostForm.propTypes = {
   obj: PropTypes.shape({
+    title: PropTypes.string,
     art: PropTypes.string,
     price: PropTypes.string,
     artistId: PropTypes.string,
