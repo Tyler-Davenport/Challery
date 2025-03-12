@@ -18,6 +18,7 @@ const initialState = {
   displayName: '',
   payment: '',
   pfp: '',
+  commission: false, // Default commission status
 };
 
 function ProfileForm({ obj = {} }) {
@@ -101,6 +102,12 @@ function ProfileForm({ obj = {} }) {
         <Form.Control as="textarea" rows={3} className={styles.inputField} placeholder="Tell us about yourself" required value={formInput.bio} onChange={(e) => setFormInput({ ...formInput, bio: e.target.value })} />
       </Form.Group>
 
+      {/* Commission Status Toggle */}
+      <Form.Group className="mb-3" controlId="commissionToggle">
+        <Form.Label>Are you accepting commissions?</Form.Label>
+        <Form.Check type="switch" id="commission-switch" label={formInput.commission ? 'Yes, I am accepting commissions' : 'No, I am not accepting commissions'} checked={formInput.commission} onChange={(e) => setFormInput({ ...formInput, commission: e.target.checked })} />
+      </Form.Group>
+
       <Button type="submit" className={styles.submitButton}>
         Submit Form
       </Button>
@@ -118,6 +125,7 @@ ProfileForm.propTypes = {
     pfp: PropTypes.string,
     uid: PropTypes.string,
     createdAt: PropTypes.string,
+    commission: PropTypes.bool, // Ensure commission is a boolean
   }),
 };
 

@@ -57,6 +57,9 @@ export default function ProfilePage() {
             <p className="text-muted">{artist.contact || 'No contact info provided'}</p>
             <p>{artist.bio || 'This artist has not added a bio yet.'}</p>
             <p>${artist.payment || 'This artist has not selected payment'}</p>
+
+            {/* Display Commission Status Under Payment */}
+            <p>Commissions: {artist.commission ? 'Open for commissions! Just email me with the email above!' : 'Closed for commissions right now, Sorry!'}</p>
           </div>
         </div>
 
