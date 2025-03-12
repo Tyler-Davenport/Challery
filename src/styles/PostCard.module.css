@@ -122,3 +122,23 @@
   border: 1px solid #f4f7f4;
   color: #333333; /* Dark text on hover */
 }
+
+.imageWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.watermarkFallback {
+  opacity: 0.8;
+}
+
+.watermarkText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+}
