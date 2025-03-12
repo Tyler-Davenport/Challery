@@ -6,6 +6,7 @@
     text-align: center;
     padding: 60px 20px;
     background: #F5F1E3; /* Soft cream background */
+    border: 2px solid #6D7F69 !important;
     border-radius: 12px;
     margin-bottom: 30px;
 }

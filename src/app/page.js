@@ -1,15 +1,17 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Container, Row, Col, Carousel, Spinner } from 'react-bootstrap';
+import { Button, Card, Container, Row, Col, Carousel, Spinner, Form, InputGroup } from 'react-bootstrap';
 import Link from 'next/link';
 import styles from '@/styles/LandingPage.module.css';
 import Image from 'next/image';
 import { getAllArtists, getRecentArtists } from '../api/artistData';
 
 export default function LandingPage() {
-  const [allArtists, setAllArtists] = useState([]); // State for all artists
-  const [recentArtists, setRecentArtists] = useState([]); // State for recent artists
+  const [allArtists, setAllArtists] = useState([]);
+  const [filteredArtists, setFilteredArtists] = useState([]); // New state for filtered artists
+  const [searchQuery, setSearchQuery] = useState('');
+  const [recentArtists, setRecentArtists] = useState([]);
   const [loadingAll, setLoadingAll] = useState(true);
   const [loadingRecent, setLoadingRecent] = useState(true);
 
@@ -19,6 +21,7 @@ export default function LandingPage() {
       .then((data) => {
         if (data && Array.isArray(data)) {
           setAllArtists(data);
+          setFilteredArtists(data); // Initialize filtered list with all artists
         }
         setLoadingAll(false);
       })
@@ -42,6 +45,19 @@ export default function LandingPage() {
         setLoadingRecent(false);
       });
   }, []);
+
+  // Handle Search Input Change
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    if (!query) {
+      setFilteredArtists(allArtists); // Reset to all artists when search is cleared
+    } else {
+      const filtered = allArtists.filter((artist) => artist.displayName.toLowerCase().includes(query));
+      setFilteredArtists(filtered);
+    }
+  };
 
   // Handle Recent Artists Section
   let recentArtistsContent;
@@ -90,12 +106,12 @@ export default function LandingPage() {
         <span className="visually-hidden">Loading...</span>
       </Spinner>
     );
-  } else if (allArtists.length === 0) {
+  } else if (filteredArtists.length === 0) {
     allArtistsContent = <p>No artists found.</p>;
   } else {
     allArtistsContent = (
       <Row>
-        {allArtists.map((artist) => (
+        {filteredArtists.map((artist) => (
           <Col key={artist.firebaseKey} md={6}>
             <Card className={styles.allArtistCard}>
               <Row className="g-0">
@@ -126,15 +142,9 @@ export default function LandingPage() {
     <Container fluid className={styles.landingContainer}>
       {/* Hero Section */}
       <div className={styles.heroSection}>
-        <Image
-          src="/images/favicon.ico"
-          alt="Challery Logo"
-          className={styles.logo}
-          width={500} // Specify a width
-          height={500} // Specify a height
-        />
+        <Image src="/images/favicon.ico" alt="Challery Logo" className={styles.logo} width={500} height={500} />
         <h1 className={styles.heroTitle}>Welcome to Challery</h1>
-        <p className={styles.heroSubtitle}>Your internet destination for buying and selling digital art. Perfect for artists, tabletop and video gamers, new and upcoming businesses and more!</p>
+        <p className={styles.heroSubtitle}>Your internet destination for buying and selling digital art. Perfect for artists, tabletop and video gamers, new and upcoming businesses, and more!</p>
         <Link href="/explore" passHref>
           <Button className={styles.ctaButton}>Explore Art</Button>
         </Link>
@@ -151,6 +161,13 @@ export default function LandingPage() {
       {/* All Artists Section */}
       <section className={styles.allArtistsSection}>
         <h2 className={styles.sectionTitle}>All Artists</h2>
+
+        {/* Search Bar */}
+        <InputGroup className="mb-3">
+          <Form.Control type="text" placeholder="Search for an artist..." value={searchQuery} onChange={handleSearch} />
+          <Button className={styles.searchButton}>Search</Button>
+        </InputGroup>
+
         {allArtistsContent}
       </section>
     </Container>
