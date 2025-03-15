@@ -5,7 +5,7 @@
 .heroSection {
     text-align: center;
     padding: 60px 20px;
-    background: #F5F1E3; /* Soft cream background */
+    background: #F5F1E3;
     border: 2px solid #6D7F69 !important;
     border-radius: 12px;
     margin-bottom: 30px;
@@ -13,13 +13,13 @@
 
 .heroTitle {
     font-size: 2.5rem;
-    color: #3E4C3F; /* Deep chai green */
+    color: #3E4C3F;
     font-weight: bold;
 }
 
 .heroSubtitle {
     font-size: 1.2rem;
-    color: #6D7F69; /* Muted chai green */
+    color: #6D7F69;
 }
 
 .categoryFilterContainer {
@@ -34,8 +34,8 @@
 }
 
 .toggleButton {
-    background: #F5F1E3 !important; /* Chai latte green */
-    border: 2px solid #E3DAC9 !important; /* Slightly darker cream border */
+    background: #F5F1E3 !important;
+    border: 2px solid #E3DAC9 !important;
     color: black !important;
     font-weight: bold;
     padding: 8px 16px;
@@ -45,7 +45,7 @@
 
 .toggleButton:hover,
 .toggleButton.active {
-    background: #748C69 !important; /* Darker chai green */
-    color: white !important; /* White text on hover/click */
+    background: #748C69 !important;
+    color: white !important;
     transform: scale(1.05);
 }

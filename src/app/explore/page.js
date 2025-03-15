@@ -12,19 +12,16 @@ function Home() {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // Fetch categories
   useEffect(() => {
     getCategories().then(setCategories);
   }, []);
 
-  // Fetch all posts
   const getAllThePosts = () => {
     getPosts()
       .then(setPosts)
       .catch((error) => console.error('Error fetching all posts:', error));
   };
 
-  // Fetch posts based on selected categories
   useEffect(() => {
     if (selectedCategories.length > 0) {
       Promise.all(selectedCategories.map((categoryId) => getPostsBycategoryId(categoryId)))
@@ -34,31 +31,26 @@ function Home() {
         })
         .catch((error) => console.error('Error fetching filtered posts:', error));
     } else {
-      getAllThePosts(); // When no category is selected, fetch all posts
+      getAllThePosts();
     }
   }, [selectedCategories]);
 
-  // Handle category selection
   const handleCategoryChange = (val) => {
     setSelectedCategories(val);
   };
 
   return (
     <Container className="text-center my-4">
-      {/* Hero Section */}
       <div className={styles.heroSection}>
         <h1 className={styles.heroTitle}>Explore What The Challery Community Has To Offer</h1>
         <p className={styles.heroSubtitle}>Looking for something specific? Try filtering by the tags!</p>
       </div>
 
-      {/* Category Filter Buttons */}
       <ToggleButtonGroup type="checkbox" name="category-options" value={selectedCategories} onChange={handleCategoryChange} className={styles.toggleButtonGroup}>
-        {/* ALL Button */}
         <ToggleButton id="category-all" value="all" className={`${styles.toggleButton} ${selectedCategories.length === 0 ? styles.active : ''}`} onClick={getAllThePosts}>
           All
         </ToggleButton>
 
-        {/* Category Buttons */}
         {categories.map((category) => (
           <ToggleButton key={category.id} id={`category-${category.id}`} value={category.id} className={`${styles.toggleButton} ${selectedCategories.includes(category.id) ? styles.active : ''}`}>
             {category.tagName}
@@ -66,7 +58,6 @@ function Home() {
         ))}
       </ToggleButtonGroup>
 
-      {/* Posts Grid (Card sizing unchanged) */}
       <div className="d-flex flex-wrap justify-content-center">{posts.length > 0 ? posts.map((post) => <PostCard key={post.id} postObj={post} onUpdate={getAllThePosts} />) : <p>No posts found.</p>}</div>
     </Container>
   );

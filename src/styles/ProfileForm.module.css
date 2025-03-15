@@ -1,21 +1,17 @@
-/* ProfileForm.module.css */
-
-/* Form container */
 .formContainer {
     margin: auto;
-    padding: 3rem 2rem; /* Adjusted padding */
+    padding: 3rem 2rem;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-top: 5rem; /* Moves form down */
+    margin-top: 5rem;
 }
 
 .formContainer label {
     color: #333333 !important;
-  }
+}
 
-/* Form title */
 .formTitle {
     font-size: 1.8rem;
     font-weight: bold;
@@ -24,28 +20,24 @@
     margin-bottom: 1.5rem;
 }
 
-/* Loading text */
 .loadingText {
     text-align: center;
     font-style: italic;
     color: #666666;
 }
 
-/* Input field styling */
 .inputField {
     width: 100%;
     color: #333333;
-    margin-bottom: 1.2rem; /* Space between inputs */
+    margin-bottom: 1.2rem;
 }
 
-/* Input styling */
 .input {
     border-radius: 8px;
     padding: 0.75rem;
-    border: 1px solid #c2d9b4; /* Chai latte-inspired border */
+    border: 1px solid #c2d9b4;
 }
 
-/* Select field styling */
 .select {
     border-radius: 8px;
     padding: 0.75rem;
@@ -53,20 +45,18 @@
     background-color: #f8f9fa;
 }
 
-/* Submit button */
 .submitButton {
     width: 100%;
     padding: 0.75rem;
-    background-color: #d0e8d0; /* Light chai latte green */
-    color: #333333; /* Dark text for contrast */
+    background-color: #d0e8d0;
+    color: #333333;
     border: none;
     border-radius: 8px;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Submit button hover */
 .submitButton:hover {
-    background-color: #c2d9b4; /* Slightly darker green on hover */
+    background-color: #c2d9b4;
     transform: translateY(-2px);
 }

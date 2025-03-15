@@ -9,19 +9,18 @@ import { getAllArtists, getRecentArtists } from '../api/artistData';
 
 export default function LandingPage() {
   const [allArtists, setAllArtists] = useState([]);
-  const [filteredArtists, setFilteredArtists] = useState([]); // New state for filtered artists
+  const [filteredArtists, setFilteredArtists] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [recentArtists, setRecentArtists] = useState([]);
   const [loadingAll, setLoadingAll] = useState(true);
   const [loadingRecent, setLoadingRecent] = useState(true);
 
-  // Fetch ALL artists
   useEffect(() => {
     getAllArtists()
       .then((data) => {
         if (data && Array.isArray(data)) {
           setAllArtists(data);
-          setFilteredArtists(data); // Initialize filtered list with all artists
+          setFilteredArtists(data);
         }
         setLoadingAll(false);
       })
@@ -31,7 +30,6 @@ export default function LandingPage() {
       });
   }, []);
 
-  // Fetch RECENT artists
   useEffect(() => {
     getRecentArtists()
       .then((data) => {
@@ -46,20 +44,18 @@ export default function LandingPage() {
       });
   }, []);
 
-  // Handle Search Input Change
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
 
     if (!query) {
-      setFilteredArtists(allArtists); // Reset to all artists when search is cleared
+      setFilteredArtists(allArtists);
     } else {
       const filtered = allArtists.filter((artist) => artist.displayName.toLowerCase().includes(query));
       setFilteredArtists(filtered);
     }
   };
 
-  // Handle Recent Artists Section
   let recentArtistsContent;
   if (loadingRecent) {
     recentArtistsContent = (
@@ -98,7 +94,6 @@ export default function LandingPage() {
     );
   }
 
-  // Handle All Artists Section
   let allArtistsContent;
   if (loadingAll) {
     allArtistsContent = (
@@ -140,7 +135,6 @@ export default function LandingPage() {
 
   return (
     <Container fluid className={styles.landingContainer}>
-      {/* Hero Section */}
       <div className={styles.heroSection}>
         <Image src="/images/favicon.ico" alt="Challery Logo" className={styles.logo} width={500} height={500} />
         <h1 className={styles.heroTitle}>Welcome to Challery</h1>
@@ -150,7 +144,6 @@ export default function LandingPage() {
         </Link>
       </div>
 
-      {/* Recent Artists Section */}
       <section className={styles.recentArtistsSection}>
         <div className={styles.recentArtistsContainer}>
           <h2 className={styles.sectionTitle}>Recent Artists</h2>
@@ -158,16 +151,12 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* All Artists Section */}
       <section className={styles.allArtistsSection}>
         <h2 className={styles.sectionTitle}>All Artists</h2>
-
-        {/* Search Bar */}
         <InputGroup className="mb-3">
           <Form.Control type="text" placeholder="Search for an artist..." value={searchQuery} onChange={handleSearch} />
           <Button className={styles.searchButton}>Search</Button>
         </InputGroup>
-
         {allArtistsContent}
       </section>
     </Container>
