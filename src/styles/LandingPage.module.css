@@ -1,13 +1,11 @@
-/* General Layout */
 .landingContainer {
-    background: linear-gradient(135deg, #A8CBB5, #E4E1C1); /* Chai Green Latte gradient */
+    background: linear-gradient(135deg, #A8CBB5, #E4E1C1);
     min-height: 100vh;
     padding: 50px 0;
     text-align: center;
     font-family: 'Poppins', sans-serif;
 }
 
-/* Hero Section */
 .heroSection {
     display: flex;
     flex-direction: column;
@@ -50,22 +48,20 @@
     transform: scale(1.05);
 }
 
-/* Search Button Styling */
 .searchButton {
-    background-color: #F5F1E3 !important; /* Cream color */
-    border: 1px solid #3C5E36 !important; /* Slightly darker cream border */
-    color: #3E4C3F !important; /* Deep chai green text */
+    background-color: #F5F1E3 !important;
+    border: 1px solid #3C5E36 !important;
+    color: #3E4C3F !important;
     font-weight: bold;
     transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease-in-out;
 }
 
 .searchButton:hover {
-    background-color: #E2DCC5 !important; /* Darker cream */
-    border: 1px solid #D6C7A1 !important; /* Even darker border */
+    background-color: #E2DCC5 !important;
+    border: 1px solid #D6C7A1 !important;
     transform: scale(1.05);
 }
 
-/* Recent Artists Section */
 .recentArtistsSection {
     max-width: 800px;
     margin: auto;
@@ -82,28 +78,26 @@
     margin-bottom: 20px;
 }
 
-/* Carousel */
 .carousel .carousel-item {
     transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
 }
 
-/* Black Carousel Navigation Arrows */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    filter: invert(0) !important; /* Ensures arrows stay black */
-    background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent black */
+    filter: invert(0) !important;
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 50%;
     padding: 10px;
 }
 
 .carousel-control-prev-icon:hover,
 .carousel-control-next-icon:hover {
-    background-color: rgba(0, 0, 0, 1); /* Fully black on hover */
+    background-color: rgba(0, 0, 0, 1);
     transform: scale(1.1);
 }
 
-/* Artist Cards */
-.recentArtistCard {
+.recentArtistCard,
+.allArtistCard {
     display: flex;
     background-color: var(--green-theme);
     border-radius: 15px;
@@ -113,12 +107,6 @@
 }
 
 .allArtistCard {
-    display: flex;
-    background-color: var(--green-theme);
-    border-radius: 15px;
-    overflow: hidden;
-    padding: 15px;
-    margin: 15px 0;
     min-height: 400px;
     max-height: 400px;
     min-width: 600px;
@@ -195,7 +183,6 @@
     color: #3C3C3C;
 }
 
-/* All Artists Section */
 .allArtistsSection {
     margin-top: 60px;
     padding: 40px;

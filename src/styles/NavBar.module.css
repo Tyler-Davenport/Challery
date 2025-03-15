@@ -1,53 +1,44 @@
-/* NavBar.module.css */
-
-/* Navbar background color */
 .navbar {
-  background-color: #a1c8a1; /* Darker chai latte-inspired green for better contrast */
+  background-color: #a1c8a1;
 }
 
-/* Navbar brand style (Challery) */
 .navbarBrand {
-  color: #333333; /* Darker text color for better contrast */
-  font-family: 'Dancing Script', cursive; /* Artistic font */
-  font-size: 2.5rem; /* Larger font size */
-  font-weight: bold; /* Bold style */
-  text-transform: uppercase; /* Optional: Uppercase text */
-  letter-spacing: 2px; /* Optional: Add some spacing between letters */
-  text-decoration: none; /* Remove default underline */
+  color: #333333;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
 }
 
-/* Style for the navbar links */
 .navLink {
-  color: #2f2f2f; /* Darker color for the nav links to make them more readable */
+  color: #2f2f2f;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
-/* Hover effect for nav links */
 .navLink:hover {
-  color: #d9f4c8; /* Slightly lighter color on hover for better visual effect */
+  color: #d9f4c8;
 }
 
-/* Style for the navbar toggle button */
 .navbar-toggler {
-  border-color: #4d4d4d; /* Darker border for better visibility */
+  border-color: #4d4d4d;
 }
 
 .navbar-toggler-icon {
-  background-color: #4d4d4d; /* Darker color for the toggle icon */
+  background-color: #4d4d4d;
 }
 
-/* Style for the sign out button */
 .signOutButton {
-  background-color: #4d4d4d; /* Darker background color for contrast */
-  border: 1px solid #ffffff; /* White border */
-  color: #ffffff; /* White text */
+  background-color: #4d4d4d;
+  border: 1px solid #ffffff;
+  color: #ffffff;
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hover effect for the sign out button */
 .signOutButton:hover {
-  background-color: #a1c8a1; /* Match navbar background on hover */
-  border: 1px solid #a1c8a1; /* Match navbar background border color */
-  color: #333333; /* Dark text on hover to match the navbar text */
+  background-color: #a1c8a1;
+  border: 1px solid #a1c8a1;
+  color: #333333;
 }

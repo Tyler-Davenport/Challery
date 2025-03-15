@@ -1,12 +1,11 @@
-/* Post card styling */
 .postCard {
   width: 18rem;
   margin: 10px;
-  background-color: #a1c8a1; /* Chai latte-inspired green */
+  background-color: #a1c8a1;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  padding: 15px; /* Adds spacing inside the card */
+  padding: 15px;
 }
 
 .cardHeader {
@@ -17,48 +16,42 @@
   border-bottom: 1px solid #ddd;
 }
 
-/* Post card hover effect */
 .postCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Card image styling */
 .cardImage {
   height: 400px;
   object-fit: cover;
   border-radius: 8px;
 }
 
-/* Profile link styling */
 .profileLink {
   display: inline-block;
-  background-color: #4d4d4d; /* Dark gray */
-  border: 1px solid #ffffff; /* White border */
-  color: #ffffff !important; /* White text */
+  background-color: #4d4d4d;
+  border: 1px solid #ffffff;
+  color: #ffffff !important;
   padding: 8px 16px;
   text-align: center;
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s ease, border-color 0.3s ease;
-  margin-bottom: 10px; /* Adds spacing below the profile link */
+  margin-bottom: 10px;
 }
 
-/* Profile link hover effect */
 .profileLink:hover {
-  background-color: #f4f7f4; /* Light background on hover */
+  background-color: #f4f7f4;
   border: 1px solid #f4f7f4;
-  color: #333333 !important; /* Dark text on hover */
+  color: #333333 !important;
 }
 
-/* Card title styling */
 .cardTitle {
   font-weight: bold;
-  color: #333333; /* Dark color for the title */
+  color: #333333;
   text-align: center;
 }
 
-/* Card price styling */
 .cardPrice {
   font-size: 1.25rem;
   font-weight: bold;
@@ -66,9 +59,8 @@
   text-align: center;
 }
 
-/* Badge styling */
 .badge {
-  background-color: #4d4d4d; /* Dark gray */
+  background-color: #4d4d4d;
   color: #ffffff;
   font-weight: 500;
   display: block;
@@ -77,58 +69,52 @@
   border-radius: 5px;
 }
 
-/* Expand button container */
 .expandButton {
-  margin-bottom: 12px; 
+  margin-bottom: 12px;
   display: flex;
   justify-content: center;
 }
 
-/* Expand button styling */
 .expandButton button {
-  background-color: #F5F1E3 !important; /* Soft cream from hero section */
-  border: 2px solid #E3DAC9 !important; /* Slightly darker cream border */
-  color: black !important; /* Dark text */
+  background-color: #F5F1E3 !important;
+  border: 2px solid #E3DAC9 !important;
+  color: black !important;
   font-weight: bold;
   padding: 8px 16px;
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Expand button hover effect */
 .expandButton button:hover {
-  background-color: #E3DAC9 !important; /* Slightly darker cream */
-  color: black !important; /* Ensures text remains readable */
+  background-color: #E3DAC9 !important;
+  color: black !important;
   transform: scale(1.05);
 }
 
-/* Ensuring proper spacing between buttons */
 .buttonContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px; /* Space between Edit and Delete buttons */
+  gap: 12px;
   width: 100%;
-  margin-top: 12px; /* Adds space above the button container */
+  margin-top: 12px;
 }
 
-/* Unified button styling */
 .cardButton {
-  background-color: #4d4d4d; /* Dark gray */
-  border: 1px solid #ffffff; /* White border */
-  color: #ffffff; /* White text */
+  background-color: #4d4d4d;
+  border: 1px solid #ffffff;
+  color: #ffffff;
   transition: background-color 0.3s ease, border-color 0.3s ease;
-  width: 100%; /* Ensures buttons fit neatly */
-  max-width: 200px; /* Limits button width */
+  width: 100%;
+  max-width: 200px;
   text-align: center;
   padding: 8px 16px;
 }
 
-/* Button hover effect */
 .cardButton:hover {
-  background-color: #f4f7f4; /* Light hover background */
+  background-color: #f4f7f4;
   border: 1px solid #f4f7f4;
-  color: #333333; /* Dark text on hover */
+  color: #333333;
 }
 
 .imageWrapper {

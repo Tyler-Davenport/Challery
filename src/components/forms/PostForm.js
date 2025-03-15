@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import styles from '@/styles/PostForm.module.css'; // Importing the CSS module
+import styles from '@/styles/PostForm.module.css';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../utils/context/authContext';
 import { createPost, updatePost } from '../../api/postData';
@@ -24,11 +24,10 @@ function PostForm({ obj = {} }) {
   const [formInput, setFormInput] = useState(initialState);
   const [categories, setCategories] = useState([]);
   const [loadingArtist, setLoadingArtist] = useState(true);
-  const [artist, setArtist] = useState(null); // Define artist state
+  const [artist, setArtist] = useState(null);
   const router = useRouter();
   const { user } = useAuth();
 
-  // Load categories & set form data if editing
   useEffect(() => {
     getCategories().then(setCategories);
 
@@ -40,13 +39,12 @@ function PostForm({ obj = {} }) {
     }
   }, [obj]);
 
-  // Fetch artist for current user
   useEffect(() => {
     if (user) {
       getSingleArtistByUid(user.uid)
         .then((artistData) => {
           if (artistData?.firebaseKey) {
-            setArtist(artistData); // Set artist state
+            setArtist(artistData);
             setFormInput((prevState) => ({
               ...prevState,
               artistId: artistData.firebaseKey,
@@ -69,11 +67,9 @@ function PostForm({ obj = {} }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if artist is loaded and if artistId is set
     if (!formInput.artistId || !artist?.firebaseKey) return;
 
     if (obj?.firebaseKey) {
-      // If it's an update, use the artist's firebaseKey
       updatePost(formInput).then(() => router.push(`/profile/${artist.firebaseKey}`));
     } else {
       const payload = { ...formInput, uid: user.uid };

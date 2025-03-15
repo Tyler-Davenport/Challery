@@ -21,7 +21,7 @@ function PostCard({ postObj, onUpdate }) {
     if (!postObj.artistId) return;
     getArtists(postObj.artistId)
       .then((data) => setArtistData(data?.[0] || null))
-      .catch(() => setArtistData(null)); // Prevent errors from breaking UI
+      .catch(() => setArtistData(null));
   }, [postObj.artistId]);
 
   useEffect(() => {

@@ -1,5 +1,4 @@
 import { clientCredentials } from '../utils/client';
-// API CALLS FOR BOOKS
 
 const endpoint = clientCredentials.databaseURL;
 
@@ -22,7 +21,6 @@ const getUserPosts = (uid) =>
       .catch(reject);
   });
 
-// get all posts
 const getPosts = () =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/post.json`, {
@@ -36,7 +34,6 @@ const getPosts = () =>
       .catch(reject);
   });
 
-// get posts by user
 const getPostsByUid = (uid) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/post.json?orderBy="uid"&equalTo="${uid}"`, {
@@ -50,7 +47,6 @@ const getPostsByUid = (uid) =>
       .catch(reject);
   });
 
-// TODO: DELETE BOOK
 const deletePost = (firebaseKey) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/post/${firebaseKey}.json`, {
@@ -64,7 +60,6 @@ const deletePost = (firebaseKey) =>
       .catch(reject);
   });
 
-// TODO: GET SINGLE BOOK
 const getSinglePost = (firebaseKey) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/post/${firebaseKey}.json`, {
@@ -78,7 +73,6 @@ const getSinglePost = (firebaseKey) =>
       .catch(reject);
   });
 
-// TODO: CREATE BOOK
 const createPost = (payload) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/post.json`, {
@@ -93,7 +87,6 @@ const createPost = (payload) =>
       .catch(reject);
   });
 
-// TODO: UPDATE BOOK
 const updatePost = (payload) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/post/${payload.firebaseKey}.json`, {
@@ -108,7 +101,6 @@ const updatePost = (payload) =>
       .catch(reject);
   });
 
-// get posts by artistId
 const getPostsByArtistId = (artistId) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/post.json?orderBy="artistId"&equalTo="${artistId}"`, {
@@ -134,21 +126,5 @@ const getPostsBycategoryId = (categoryId) =>
       .then((data) => resolve(Object.values(data)))
       .catch(reject);
   });
-
-// const booksOnSale = (uid) =>
-//   new Promise((resolve, reject) => {
-//     fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         const onSale = Object.values(data).filter((item) => item.sale);
-//         resolve(onSale);
-//       })
-//       .catch(reject);
-//   });
 
 export { getPosts, getPostsByUid, createPost, deletePost, getSinglePost, updatePost, getPostsByArtistId, getUserPosts, getPostsBycategoryId };

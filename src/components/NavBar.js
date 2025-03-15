@@ -15,7 +15,7 @@ export default function NavBar() {
   const router = useRouter();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState(null); // Default is null (no tab highlighted)
+  const [activeTab, setActiveTab] = useState(null);
 
   const handleProfileClick = async () => {
     setLoading(true);
@@ -36,19 +36,11 @@ export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" className={styles.navbar}>
       <Container style={{ display: 'flex', alignItems: 'center' }}>
-        {/* Brand (Logo + "Challery" Text) */}
-        <Link
-          passHref
-          href="/"
-          className={styles.navbarBrand}
-          style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }} // Reduce space between brand and tabs
-          onClick={() => setActiveTab(null)} // Reset active tab when clicking "Challery"
-        >
+        <Link passHref href="/" className={styles.navbarBrand} style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }} onClick={() => setActiveTab(null)}>
           <Image src="/images/favicon.ico" alt="Challery Logo" width={100} height={100} style={{ marginRight: '8px' }} />
           <span className={styles.brandText}>Challery</span>
         </Link>
 
-        {/* Navigation Tabs - Moved Closer to Challery */}
         <Tabs
           activeKey={activeTab}
           onSelect={(key) => {
@@ -57,7 +49,7 @@ export default function NavBar() {
             if (key === 'profile') handleProfileClick();
           }}
           style={{
-            borderBottom: 'none', // Remove tab underline
+            borderBottom: 'none',
             display: 'flex',
             alignItems: 'center',
           }}
@@ -66,7 +58,6 @@ export default function NavBar() {
           <Tab eventKey="profile" title={<span style={{ fontSize: '20px', padding: '10px 25px', minWidth: '160px' }}>{loading ? 'Checking...' : 'Profile'}</span>} />
         </Tabs>
 
-        {/* Sign Out Button - Aligned Right */}
         <div style={{ marginLeft: 'auto' }}>
           <Button variant="outline-light" onClick={signOut} className={styles.signOutButton}>
             Sign Out

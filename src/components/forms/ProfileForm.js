@@ -8,7 +8,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
-import styles from '@/styles/ProfileForm.module.css'; // Import the CSS module
+import styles from '@/styles/ProfileForm.module.css';
 import { useAuth } from '../../utils/context/authContext';
 import { createArtist, updateArtist } from '../../api/artistData';
 
@@ -18,7 +18,7 @@ const initialState = {
   displayName: '',
   payment: '',
   pfp: '',
-  commission: false, // Default commission status
+  commission: false,
 };
 
 function ProfileForm({ obj = {} }) {
@@ -49,14 +49,12 @@ function ProfileForm({ obj = {} }) {
     setValidated(true);
 
     if (formInput?.firebaseKey) {
-      // If updating, keep existing createdAt value
       updateArtist(formInput).then(() => router.push(`/profile/${obj.firebaseKey}`));
     } else {
-      // If creating a new artist, add createdAt timestamp
       const payload = {
         ...formInput,
         uid: user.uid,
-        createdAt: new Date().toISOString(), // Stores current timestamp
+        createdAt: new Date().toISOString(),
       };
 
       createArtist(payload).then(({ name }) => {
@@ -102,7 +100,6 @@ function ProfileForm({ obj = {} }) {
         <Form.Control as="textarea" rows={3} className={styles.inputField} placeholder="Tell us about yourself" required value={formInput.bio} onChange={(e) => setFormInput({ ...formInput, bio: e.target.value })} />
       </Form.Group>
 
-      {/* Commission Status Toggle */}
       <Form.Group className="mb-3" controlId="commissionToggle">
         <Form.Label>Are you accepting commissions?</Form.Label>
         <Form.Check type="switch" id="commission-switch" label={formInput.commission ? 'Yes, I am accepting commissions' : 'No, I am not accepting commissions'} checked={formInput.commission} onChange={(e) => setFormInput({ ...formInput, commission: e.target.checked })} />
@@ -125,7 +122,7 @@ ProfileForm.propTypes = {
     pfp: PropTypes.string,
     uid: PropTypes.string,
     createdAt: PropTypes.string,
-    commission: PropTypes.bool, // Ensure commission is a boolean
+    commission: PropTypes.bool,
   }),
 };
 
